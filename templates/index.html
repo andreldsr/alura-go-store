@@ -1,0 +1,51 @@
+{{define "Index"}}
+    {{template "_head"}}
+    {{template "_menu"}}
+    <div class="container">
+        <section class="card">
+            <div>
+                <table class="table table-striped table-hover mb-0">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{range .}}
+                        <tr>
+                            <td>{{.Name}}</td>
+                            <td>{{.Description}}</td>
+                            <td>{{.Quantity}}</td>
+                            <td>{{.Price}}</td>
+                            <td>
+                                <a href="/edit?id={{.Id}}" class="btn btn-secondary">Edit</a>
+                            </td>
+                            <td>
+                                <button onclick="onDelete('{{.Id}}')" class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                    {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="footer m-2">
+            <a href="/new" class="btn btn-primary">Create new product</a>
+        </div>
+    </div>
+    <script>
+        function onDelete(id) {
+            let del = confirm("Are you sure you want to delete this item?")
+            if (del) {
+                window.location = `/delete?id=${id}`
+            }
+        }
+    </script>
+    {{template "_footer"}}
+{{end}}
